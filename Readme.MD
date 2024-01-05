@@ -112,3 +112,9 @@ crontab -e
 
 
 
+## docker deploy
+- copy_envs.sh
+
+```
+chmod +x copy_envs.sh
+```
