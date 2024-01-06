@@ -46,7 +46,7 @@ services:
       - "7010:2342"
     environment:
       PHOTOPRISM_ADMIN_USER: "admin"                 # admin login username
-      PHOTOPRISM_ADMIN_PASSWORD: "insecure"          # initial admin password (8-72 characters)
+      PHOTOPRISM_ADMIN_PASSWORD: ${ENV_PHOTOPRISM_ADMIN_PASSWORD}         # initial admin password (8-72 characters)
       PHOTOPRISM_AUTH_MODE: "password"               # authentication mode (public, password)
       PHOTOPRISM_SITE_URL: "http://localhost:7010/"  # server URL in the format "http(s)://domain.name(:port)/(path)"
       PHOTOPRISM_DISABLE_TLS: "false"                # disables HTTPS/TLS even if the site URL starts with https:// and a certificate is available
@@ -73,12 +73,10 @@ services:
       PHOTOPRISM_DATABASE_SERVER: "mariadb:3306"     # MariaDB or MySQL database server (hostname:port)
       PHOTOPRISM_DATABASE_NAME: "photoprism"         # MariaDB or MySQL database schema name
       PHOTOPRISM_DATABASE_USER: "photoprism"         # MariaDB or MySQL database user name
-      PHOTOPRISM_DATABASE_PASSWORD: ${ENVPHOTOPRISM_DATABASE_PASSWORD}   # MariaDB or MySQL database user password
+      PHOTOPRISM_DATABASE_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}   # MariaDB or MySQL database user password
       PHOTOPRISM_SITE_CAPTION: "AI-Powered Photos App"
       PHOTOPRISM_SITE_DESCRIPTION: ""                # meta site description
       PHOTOPRISM_SITE_AUTHOR: ""                     # meta site author
-    secrets:
-      - databasepassword
       ## Video Transcoding (https://docs.photoprism.app/getting-started/advanced/transcoding/):
       # PHOTOPRISM_FFMPEG_ENCODER: "software"        # H.264/AVC encoder (software, intel, nvidia, apple, raspberry, or vaapi)
       # PHOTOPRISM_FFMPEG_SIZE: "1920"               # video size limit in pixels (720-7680) (default: 3840)
@@ -130,10 +128,8 @@ services:
       MARIADB_INITDB_SKIP_TZINFO: "1"
       MARIADB_DATABASE: "photoprism"
       MARIADB_USER: "photoprism"
-      MARIADB_PASSWORD: "insecure"
-      MARIADB_ROOT_PASSWORD: "insecure"
-    secrets:
-      - databasepassword
+      MARIADB_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}
 
   ## Watchtower upgrades services automatically (optional)
   ## see https://docs.photoprism.app/getting-started/updates/#watchtower
@@ -148,6 +144,3 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "~/.docker/config.json:/config.json" # optional, for authentication if you have a Docker Hub account
-secrets:
-  databasepassword:
-    file: databasepassword.txt

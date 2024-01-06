@@ -113,6 +113,9 @@ crontab -e
 
 
 ## docker deploy
+
+To deploy the application, copy the environments from configuration 
+
 - copy_envs.sh
 
 ```
