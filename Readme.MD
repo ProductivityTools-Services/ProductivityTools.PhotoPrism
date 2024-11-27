@@ -90,3 +90,11 @@ update albums set album_category=substring_index(album_path,"#",-1)  where album
 ## cron script
 chmod u+x hello_world.sh
 
+
+### Copy script to docker
+
+docker cp foo.txt container_id:/foo.txt
+
+export PrismDBPassword=
+
+
