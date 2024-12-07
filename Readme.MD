@@ -48,7 +48,6 @@ select album_path, album_title,convert(album_order, char(200)), convert(album_ty
 
 ## Updating the cover
 
-
 ```sql
 --- query selects all important data
 select a.album_path
@@ -80,6 +79,11 @@ select thumb,convert(thumb,char(100)), thumb_src,convert(thumb_src, char(200)) f
 
 update albums set thumb='870f69d6c6f3f0ad9232b195585099a3fb87828b', thumb_src='manual' where album_title='2007.05.07 - Wroclaw Z Wujczykami - Odwiedziny';
 ```
+Select Covers from all directories
+```
+select a.album_path ,convert(a.album_type, char(200)) ,a.album_type ,p.id ,convert(p.photo_name, char(200))  ,convert(f.file_hash, char(200)) from albums a  inner join photos p on a.album_path=p.photo_path  inner join files f on p.id=f.photo_id where convert(album_type, char(100))='folder' and convert(p.photo_name, char(200)) like '%Cover%';
+
+```
 
 ## Updating the categories for albums
 
@@ -87,7 +91,7 @@ update albums set thumb='870f69d6c6f3f0ad9232b195585099a3fb87828b', thumb_src='m
 update albums set album_category=substring_index(album_path,"#",-1)  where album_path <> "" and position("#" in album_path)>0;
 ```
 
-## cron script
+## set cron script to be runnable
 chmod u+x hello_world.sh
 
 
@@ -96,5 +100,15 @@ chmod u+x hello_world.sh
 docker cp foo.txt container_id:/foo.txt
 
 export PrismDBPassword=
+
+###
+set crontab
+
+```
+crontab -e
+*/5 * * * * /UpdateDB.sh
+```
+
+
 
 
