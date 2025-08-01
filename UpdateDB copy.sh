@@ -6,7 +6,7 @@ LOG_FILE="/script_log.txt"
 # Log the start time of the script
 echo "$(date): Script started" >> "$LOG_FILE"
 
-source /Prism.env
+source /home/pawel/github/Home.Configuration/Prism.env
 
 echo $ENV_PHOTOPRISM_DATABASE_PASSWORD >> "$LOG_FILE"
 echo "pawel"
