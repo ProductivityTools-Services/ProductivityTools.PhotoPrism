@@ -1,4 +1,6 @@
 #! /usr/bin/bash
+source /home/pawel/github/Home.Configuration/Prism.env
+
 echo "pawel"
 echo $ENV_PHOTOPRISM_DATABASE_PASSWORD
 
