@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/pawel/github/Home.Configuration/Prism.env
+
 echo "Hello copy envs"
 echo "This script will copy envs from the Home.Configuration directory to here"
 

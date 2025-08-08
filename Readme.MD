@@ -98,6 +98,16 @@ update albums set album_category=substring_index(album_path,"#",-1)  where album
 ```
 
 ## set cron script to be runnable
+- Copy file to docker
+```
+ docker cp UpdateDB.sh ba776ec3b21e:\UpdateDB.sh
+```
+- On the docker instance set first the env variable
+```
+export ENV_PHOTOPRISM_DATABASE_PASSWORD=
+```
+
+Debug:
 source /home/pawel/github/Home.Configuration/Prism.env
 echo $ENV_PHOTOPRISM_DATABASE_PASSWORD
 
@@ -108,12 +118,15 @@ chmod u+x hello_world.sh
 
 docker cp foo.txt container_id:/foo.txt
 
-export PrismDBPassword=
+export ENV_PHOTOPRISM_DATABASE_PASSWORD=
 
 ###
 set crontab
 
 ```
+apt-get update && apt-get install -y cron
+apt-get update && apt-get install -y nano
+
 crontab -e
 */5 * * * * /UpdateDB.sh
 ```
