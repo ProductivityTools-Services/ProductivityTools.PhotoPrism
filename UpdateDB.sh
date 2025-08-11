@@ -6,11 +6,14 @@ LOG_FILE="/script_log.txt"
 # Log the start time of the script
 echo "$(date): Script started" >> "$LOG_FILE"
 
+echo "xx" >> "$LOG_FILE"
 source /Prism.env
 
+echo "variales loaded" >> "$LOG_FILE"
+
 echo $ENV_PHOTOPRISM_DATABASE_PASSWORD >> "$LOG_FILE"
-echo "pawel"
-echo $ENV_PHOTOPRISM_DATABASE_PASSWORD
+#echo "pawel"
+#echo $ENV_PHOTOPRISM_DATABASE_PASSWORD
 
 mysql --user="root" --password=$ENV_PHOTOPRISM_DATABASE_PASSWORD --database="photoprism" --execute="update albums a
 inner join photos p on a.album_path=p.photo_path

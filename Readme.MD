@@ -1,5 +1,13 @@
 # PhotoPrism
 
+## Sync directories
+
+$SourceDirectory="e:\Prism\PrismPhoto\"
+$DestinationDirectory="\\192.168.0.41\Prism\PrismPhoto\"
+Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt 
+
+## Cover
+
 - **Cover** - Each directory should have one photo with the **_Cover** suffix. This photo will be used by Prism as the album cover.
 
 
