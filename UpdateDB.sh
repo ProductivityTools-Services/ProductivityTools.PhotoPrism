@@ -22,4 +22,8 @@ set thumb=convert(f.file_hash, char(200)),thumb_src='manual', album_order='name'
 where convert(album_type, char(100))='folder'
 and convert(p.photo_name, char(200)) like '%Cover%';"
 
+# echo "not sure if this below will work, maybe there is a need to split into two scripts"
+mysql --user="root" --password=$ENV_PHOTOPRISM_DATABASE_PASSWORD --database="photoprism" --execute="update albums 
+set album_category=substring_index(album_path,"#",-1)  where album_path <> "" and position("#" in album_path)>0;"
+
 echo "$(date): Script finished" >> "$LOG_FILE
