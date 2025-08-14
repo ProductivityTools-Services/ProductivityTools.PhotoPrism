@@ -137,10 +137,3 @@ To deploy the application, copy the environments from configuration
 ```
 chmod +x copy_envs.sh
 ```
-
-
-## Debug commands
-
-$SourceDirectory="e:\Prism\PrismPhoto\"
-$DestinationDirectory="\\192.168.0.41\Prism\PrismPhoto\"
-Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt 
