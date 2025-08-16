@@ -4,7 +4,7 @@ echo "Hello copy envs"
 echo "This script will copy envs from the Home.Configuration directory to here"
 
 from=~/github/Home.Configuration/Prism.env
-to="./.env"
+to="./Prism.env"
 
 cp $from $to
 
