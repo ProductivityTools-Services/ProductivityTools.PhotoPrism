@@ -102,7 +102,8 @@ update albums set album_category=substring_index(album_path,"#",-1)  where album
 ## Set cron script on the docker to update the cover
 - Copy file to docker
 ```
- docker cp UpdateDB.sh ba776ec3b21e:\UpdateDB.sh
+ docker cp UpdateDB.sh 4200471e7c42:\UpdateDB.sh
+docker cp Prism.env 4200471e7c42:\Prism.env
 ```
 - On the docker instance set the env variable
 ```
