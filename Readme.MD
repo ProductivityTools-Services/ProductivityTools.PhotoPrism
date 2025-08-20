@@ -102,10 +102,10 @@ update albums set album_category=substring_index(album_path,"#",-1)  where album
 ## Set cron script on the docker to update the cover
 - Copy file to docker
 ```
- docker cp UpdateDB.sh 4200471e7c42:\UpdateDB.sh
+docker cp UpdateDB.sh 4200471e7c42:\UpdateDB.sh
 docker cp Prism.env 4200471e7c42:\Prism.env
 ```
-- On the docker instance set the env variable
+- On the docker instance set the env variable (Not needed)
 ```
 export ENV_PHOTOPRISM_DATABASE_PASSWORD=
 ```
@@ -122,6 +122,9 @@ chmod u+x hello_world.sh
 ```
 apt-get update && apt-get install -y cron
 apt-get update && apt-get install -y nano
+apt-get update && apt-get install -y mysql-client
+service cron start
+
 
 crontab -e
 */5 * * * * /UpdateDB.sh
