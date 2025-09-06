@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Hello copy envs"
 echo "This script will copy envs from the Home.Configuration directory to here"
 
