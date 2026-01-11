@@ -6,10 +6,11 @@ function Write-Log {
     "$((Get-Date -Format 'HH:mm:ss')) - $Message" | Out-File -FilePath $LogFile -Append
 }
  #Write-Log -Message "start"
-Write-Host "Start"
+Write-Host "Start improved"
 $SourceDirectory="e:\Prism\PrismPhoto\"
 $DestinationDirectory="\\192.168.0.41\Prism\PrismPhoto\"
-Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt /NFL
+Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
+#Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt /NFL
 
 Install-Module ProductivityTools.DirectoryReverseOrder  -Scope CurrentUser -Force -AcceptLicense
 cd $SourceDirectory
@@ -24,4 +25,14 @@ Write-Host "End"
 Write-Host "Update trash"
 $SourceDirectory="e:\Prism\PrismTrash\"
 $DestinationDirectory="f:\.backup.pt.Prism\PrismTrash\"
-Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt
+Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
+
+$SourceDirectory="e:\Prism\OtherPhotos\"
+$DestinationDirectory="f:\.backup.pt.Prism\OtherPhotos\"
+Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
+
+$SourceDirectory="e:\Prism\RodziceDrop\"
+$DestinationDirectory="f:\.backup.pt.Prism\RodziceDrop\"
+Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
+
+
