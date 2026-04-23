@@ -131,6 +131,11 @@ services:
       MARIADB_USER: "photoprism"
       MARIADB_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-p$ENV_PHOTOPRISM_DATABASE_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   ## Watchtower upgrades services automatically (optional)
   ## see https://docs.photoprism.app/getting-started/updates/#watchtower
@@ -146,15 +151,17 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "~/.docker/config.json:/config.json" # optional, for authentication if you have a Docker Hub account
 
-  ## Periodic Database Updater
   db-updater:
     image: mariadb:11
     restart: unless-stopped
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     environment:
       ENV_PHOTOPRISM_DATABASE_PASSWORD: ${ENV_PHOTOPRISM_DATABASE_PASSWORD}
       DB_HOST: mariadb
     volumes:
       - ./UpdateDB.sh:/UpdateDB.sh:ro
-    entrypoint: /bin/bash -c "while true; do /bin/bash /UpdateDB.sh; sleep 60; done"
+      # Uncomment the following line if you want to use a Prism.env file
+      # - ./Prism.env:/Prism.env:ro
+    entrypoint: /bin/bash -c "apt-get update && apt-get install -y mariadb-client && while true; do /bin/bash /UpdateDB.sh; sleep 60; done"
