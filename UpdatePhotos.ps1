@@ -7,7 +7,7 @@ function Write-Log {
 }
  #Write-Log -Message "start"
 Write-Host "Start improved"
-$SourceDirectory="e:\Prism\PrismPhoto\"
+$SourceDirectory="f:\Prism\PrismPhoto\"
 $DestinationDirectory="\\192.168.0.41\Prism\PrismPhoto\"
 Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
 #Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt /NFL
