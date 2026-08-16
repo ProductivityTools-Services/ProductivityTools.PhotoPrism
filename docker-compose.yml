@@ -45,6 +45,9 @@ services:
       ## on the left-hand side and keep the container port, e.g. "80:2342" (for HTTP) or "443:2342 (for HTTPS):
       - "7010:2342"
     environment:
+      PHOTOPRISM_WORKERS: 1                          # only one photo at the time, reduces memory usage (1-4)
+      PHOTOPRISM_THUMB_FILTER: "cubic"               # lightwight thumbnail generation
+      PHOTOPRISM_THUMB_SIZE: 2048                    # thumbnail size in pixels
       PHOTOPRISM_ADMIN_USER: "admin"                 # admin login username
       PHOTOPRISM_ADMIN_PASSWORD: ${ENV_PHOTOPRISM_ADMIN_PASSWORD}         # initial admin password (8-72 characters)
       PHOTOPRISM_AUTH_MODE: "password"               # authentication mode (public, password)

@@ -23,16 +23,16 @@ Write-Host "End"
  #Write-Log -Message "end"
 
 Write-Host "Update trash"
-$SourceDirectory="e:\Prism\PrismTrash\"
-$DestinationDirectory="f:\.backup.pt.Prism\PrismTrash\"
+$SourceDirectory="f:\Prism\PrismTrash\"
+$DestinationDirectory="e:\.backup.pt.Prism\PrismTrash\"
 Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
 
-$SourceDirectory="e:\Prism\OtherPhotos\"
-$DestinationDirectory="f:\.backup.pt.Prism\OtherPhotos\"
+$SourceDirectory="f:\Prism\OtherPhotos\"
+$DestinationDirectory="e:\.backup.pt.Prism\OtherPhotos\"
 Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
 
-$SourceDirectory="e:\Prism\RodziceDrop\"
-$DestinationDirectory="f:\.backup.pt.Prism\RodziceDrop\"
+$SourceDirectory="f:\Prism\RodziceDrop\"
+$DestinationDirectory="e:\.backup.pt.Prism\RodziceDrop\"
 Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
 
 
