@@ -153,3 +153,10 @@ To deploy the application, copy the environments from configuration
 ```
 chmod +x copy_envs.sh
 ```
+
+
+## Denug docker
+```
+docker logs --tail 200 productivitytoolsphotoprism-photoprism-1
+docker inspect productivitytoolsphotoprism-photoprism-1 --format '{{.State.OOMKilled}}'
+```
