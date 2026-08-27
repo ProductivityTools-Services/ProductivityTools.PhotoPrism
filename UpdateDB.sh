@@ -34,6 +34,9 @@ where convert(album_type, char(100))='folder'
 and convert(p.photo_name, char(200)) like '%Cover%';"
 
 $DB_CLIENT -h "$DB_HOST" --user="root" --password="$ENV_PHOTOPRISM_DATABASE_PASSWORD" --database="photoprism" --execute="update albums
+set album_category='';
+
+update albums
 set album_category=substring_index(album_path,'#',-1)  where album_path <> '' and position('#' in album_path)>0;"
 
 echo "$(date): Script finished" | tee -a "$LOG_FILE"

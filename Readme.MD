@@ -96,6 +96,7 @@ select a.album_path ,convert(a.album_type, char(200)) ,a.album_type ,p.id ,conve
 ## Updating the categories for albums
 
 ```sql
+update albums set album_category='';
 update albums set album_category=substring_index(album_path,"#",-1)  where album_path <> "" and position("#" in album_path)>0;
 ```
 
