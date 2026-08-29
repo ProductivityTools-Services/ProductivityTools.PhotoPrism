@@ -9,15 +9,21 @@ function Write-Log {
 Write-Host "Start improved"
 $SourceDirectory="f:\Prism\PrismPhoto\"
 $DestinationDirectory="\\192.168.0.41\Prism\PrismPhoto\"
+
+cd $SourceDirectory
+Remove-PrefixFromDirectoryName
+cd $DestinationDirectory
+Remove-PrefixFromDirectoryName
+
 Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT 
 #Robocopy.exe $SourceDirectory $DestinationDirectory /MIR /DCOPY:T /e /copy:DAT /mt /NFL
 
 Install-Module ProductivityTools.DirectoryReverseOrder  -Scope CurrentUser -Force -AcceptLicense
+
 cd $SourceDirectory
-Remove-PrefixFromDirectoryName
 Set-DirectoryInReverseOrder
+
 cd $DestinationDirectory
-Remove-PrefixFromDirectoryName
 Set-DirectoryInReverseOrder
 Write-Host "End"
  #Write-Log -Message "end"
