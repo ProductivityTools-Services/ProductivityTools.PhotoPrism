@@ -36,6 +36,10 @@ and convert(p.photo_name, char(200)) like '%Cover%';"
 $DB_CLIENT -h "$DB_HOST" --user="root" --password="$ENV_PHOTOPRISM_DATABASE_PASSWORD" --database="photoprism" --execute="update albums
 set album_category='';
 
+DELETE FROM albums 
+WHERE album_type = 'folder' 
+  AND id NOT IN (SELECT DISTINCT album_id FROM photos_albums);
+
 update albums
 set album_category=substring_index(album_path,'#',-1)  where album_path <> '' and position('#' in album_path)>0;"
 
