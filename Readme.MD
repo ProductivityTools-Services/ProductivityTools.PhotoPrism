@@ -41,7 +41,7 @@ select convert(photo_path, char(100)) from photos
 ### Albums table
 
 ```sql
-select album_path, album_title,convert(album_order, char(200)), convert(album_type, char(200)), album_type from albums where convert(album_type, char(100))='folder'
+select album_path, album_category, album_title,convert(album_order, char(200)), convert(album_type, char(200)), album_type from albums where convert(album_type, char(100))='folder';
 
 select album_path, album_title,convert(album_order, char(200)), convert(album_type, char(200)), album_type from albums where convert(album_type, char(100))='folder' and album_title='2007.05.07 - Wroclaw Z Wujczykami - Odwiedziny'
 ```
@@ -161,3 +161,11 @@ chmod +x copy_envs.sh
 docker logs --tail 200 productivitytoolsphotoprism-photoprism-1
 docker inspect productivitytoolsphotoprism-photoprism-1 --format '{{.State.OOMKilled}}'
 ```
+
+
+
+----OLD: sets categories to old albums, for debbug purpose,
+you can invoke that and old categories should show, and later the cron should clean them
+
+update albums
+set album_category=substring_index(album_path,'#',-1)  where album_path <> '' and position('#' in album_path)>0;"
