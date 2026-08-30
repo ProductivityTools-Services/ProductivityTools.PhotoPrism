@@ -36,12 +36,25 @@ and convert(p.photo_name, char(200)) like '%Cover%';"
 $DB_CLIENT -h "$DB_HOST" --user="root" --password="$ENV_PHOTOPRISM_DATABASE_PASSWORD" --database="photoprism" --execute="update albums
 set album_category='';
 
+
 DELETE FROM albums 
 WHERE album_type = 'folder' 
-  AND id NOT IN (SELECT DISTINCT album_id FROM photos_albums);
+  AND album_path NOT IN (SELECT DISTINCT photo_path FROM photos WHERE photo_path IS NOT NULL AND photo_path <> '');
 
-update albums
-set album_category=substring_index(album_path,'#',-1)  where album_path <> '' and position('#' in album_path)>0;"
+
+UPDATE albums set album_category='';
+
+UPDATE albums 
+SET album_category = SUBSTRING_INDEX(album_path, '#', -1) 
+WHERE album_type = 'folder' 
+  AND album_path <> '' 
+  AND POSITION('#' IN album_path) > 0
+  AND album_path IN (
+      SELECT DISTINCT photo_path 
+      FROM photos 
+      WHERE photo_path IS NOT NULL 
+        AND photo_path <> ''
+  );
 
 echo "$(date): Script finished" | tee -a "$LOG_FILE"
 
